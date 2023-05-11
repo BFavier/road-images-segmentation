@@ -54,9 +54,9 @@ st.title("Road images segmentation")
 st.markdown("This is a semantic segmentation model trained on cars' dashcams in urban environments. It segments the image into ten classes.")
 source = st.radio("Get image from", ('default', 'camera', 'upload'), horizontal=True)
 if source == "camera":
-    image = resized(st.camera_input("Take a picture") or get_default_image(), label_visibility="hidden")
+    image = resized(st.camera_input("Take a picture", label_visibility="collapsed") or get_default_image())
 elif source == "upload":
-    file = st.file_uploader("Choose a file", label_visibility="hidden")
+    file = st.file_uploader("Choose a file", label_visibility="collapsed")
     if file is not None:
         stream = BytesIO(file.getvalue())
         image = resized(get_picture(file))
