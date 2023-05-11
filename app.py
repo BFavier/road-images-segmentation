@@ -51,7 +51,7 @@ with st.sidebar:
     st.markdown("[Ma page Linkedin](https://www.linkedin.com/in/benoit-favier-9694b9206/)")
 
 st.title("Road images segmentation")
-st.markdown("This is a semantic segmentation model trained on cars' dashcams in urban environments. It segments the image into ten classes.")
+st.markdown("This is a semantic segmentation model trained on dashcams in urban environments. It segments the image into ten classes.")
 source = st.radio("Get image from", ('default', 'camera', 'upload'), horizontal=True)
 if source == "camera":
     image = resized(st.camera_input("Take a picture", label_visibility="collapsed") or get_default_image())
