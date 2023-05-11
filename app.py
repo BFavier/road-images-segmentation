@@ -1,6 +1,6 @@
 import streamlit as st
 import pygmalion as ml
-from skimage.transform import resize
+from skimage.transform import resize, rotate
 import numpy as np
 from skimage.io import imread
 
@@ -28,8 +28,10 @@ def resized(image):
     """
     Return the image resized and croped to a power of two dimension
     """
-
     h, w = image.shape[:2]
+    if h > w:
+        image = rotate(image, 90.0)
+        h, w = image.shape[:2]
     scale = min(h, w//2)
     H, W = scale, 2*scale
     i, j = (h - H)//2, (w - W)//2
