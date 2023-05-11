@@ -52,7 +52,7 @@ with st.sidebar:
 
 st.title("Road images segmentation")
 st.markdown(".")
-source = st.radio("Get image from", ('camera', 'upload', 'default'), horizontal=True)
+source = st.radio("Get image from", ('default', 'camera', 'upload'), horizontal=True)
 if source == "camera":
     image = resized(st.camera_input("Take a picture") or get_default_image())
 elif source == "upload":
