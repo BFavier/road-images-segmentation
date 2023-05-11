@@ -28,6 +28,10 @@ def resized(image):
     """
     Return the image resized and croped to a power of two dimension
     """
+    if len(image.shape) == 3:
+        image = image[:, :, :3]
+    else:
+        image = np.repeat(image[..., None], 3, -1)
     h, w = image.shape[:2]
     if h > w:
         image = rotate(image, 90.0)
@@ -96,11 +100,20 @@ class Grid:
             for col in st.columns(self.n_columns):
                 yield col
 
-
+string = ""
+div = []
 for col, cls, color in zip(Grid(5), classes, colors):
-    with col:
-        # st.text(cls)
-        hexa = "#"+"".join(f"{c:04x}"[2:] for c in color)
-        st.markdown(f"<div style='color:{hexa}'>&#9632;</div>{cls}", unsafe_allow_html=True)
-        # st.color_picker(cls, "#"+"".join(f"{c:04x}"[2:] for c in color), disabled=True)
+    hexa = "#"+"".join(f"{c:04x}"[2:] for c in color)
+    div.append(f"<td><font color='{hexa}'>&#9632;</font> {cls}</td>")
+    if len(div) == 5:
+        string += "<tr>"+" ".join(div)+"</tr>"
+        div = []
+st.markdown("<table>"+string+"</table>", unsafe_allow_html=True)
+
+# for col, cls, color in zip(Grid(5), classes, colors):
+#     with col:
+#         # st.text(cls)
+#         hexa = "#"+"".join(f"{c:04x}"[2:] for c in color)
+#         st.markdown(f"<div style='color:{hexa}'>&#9632;</div>{cls}", unsafe_allow_html=True)
+#         # st.color_picker(cls, "#"+"".join(f"{c:04x}"[2:] for c in color), disabled=True)
 
