@@ -51,12 +51,12 @@ with st.sidebar:
     st.markdown("[Ma page Linkedin](https://www.linkedin.com/in/benoit-favier-9694b9206/)")
 
 st.title("Road images segmentation")
-st.markdown(".")
+st.markdown("This is a semantic segmentation model trained on cars' dashcams in urban environments. It segments the image into ten classes.")
 source = st.radio("Get image from", ('default', 'camera', 'upload'), horizontal=True)
 if source == "camera":
-    image = resized(st.camera_input("Take a picture") or get_default_image())
+    image = resized(st.camera_input("Take a picture") or get_default_image(), label_visibility="hidden")
 elif source == "upload":
-    file = st.file_uploader("Choose a file")
+    file = st.file_uploader("Choose a file", label_visibility="hidden")
     if file is not None:
         stream = BytesIO(file.getvalue())
         image = resized(get_picture(file))
